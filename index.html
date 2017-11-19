@@ -53,9 +53,17 @@ $( document ).ready(function() {
                          data: { "data": data },
                          success: function(){ document.location = "/next" },
                          dataType: "application/json",
+
                          error: function(err) {
+
+                             if (err.status == 200){
+                                document.location = "/next"
+                             } else {
+                                 // If error, assue local save
                               jsPsych.data.localSave('probabilistic-selection_results.csv', 'csv');
+                            }
                          }
+
                      });
                  })
              }
